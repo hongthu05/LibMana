@@ -1,73 +1,85 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hệ Thống Quản Lý Thư Viện</title>
-  <link rel="stylesheet" href="style.css"> <!-- optional -->
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #004d99;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    nav {
-      background-color: #e6e6e6;
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-    nav a {
-      text-decoration: none;
-      color: #004d99;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    main {
-      padding: 30px;
-      text-align: center;
-    }
-    footer {
-      text-align: center;
-      padding: 10px;
-      background-color: #004d99;
-      color: white;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Quản lý Độc Giả</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #eee;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Hệ Thống Quản Lý Thư Viện Trường Đại Học</h1>
-  </header>
 
-  <nav>
-    <a href="docgia.html">Quản lý Độc Giả</a>
-    <a href="muontra.html">Mượn / Trả Sách</a>
-    <a href="vipham.html">Quản lý Vi phạm</a>
-    <a href="khosach.html">Quản lý Kho Sách</a>
-    <a href="baocao.html">Báo cáo</a>
-  </nav>
+<h1>Danh sách Độc Giả</h1>
 
-  <main>
-    <h2>Chào mừng đến với hệ thống quản lý thư viện!</h2>
-    <p>Vui lòng chọn chức năng ở menu để tiếp tục.</p>
-  </main>
+<table>
+    <thead>
+        <tr>
+            <th>Mã Độc Giả</th>
+            <th>Họ Tên</th>
+            <th>Giới Tính</th>
+            <th>Trạng Thái Thẻ</th>
+            <th>Sách Đang Mượn</th>
+        </tr>
+    </thead>
+    <tbody id="docgia-table">
+        <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+    </tbody>
+</table>
 
-  <footer>
-    &copy; 2025 - Thư viện Trường Đại Học
-  </footer>
+<script>
+// Giả sử dữ liệu từ server trả về dạng JSON như sau:
+const docGiaList = [
+    {
+        maDocGia: "DG001",
+        hoTen: "Nguyễn Văn A",
+        gioiTinh: "Nam",
+        trangThai: "Hoạt động",
+        sachMuon: ["Lập trình C++", "Cấu trúc dữ liệu"]
+    },
+    {
+        maDocGia: "DG002",
+        hoTen: "Trần Thị B",
+        gioiTinh: "Nữ",
+        trangThai: "Bị khóa",
+        sachMuon: ["Kinh tế vi mô"]
+    }
+];
+
+// Hiển thị dữ liệu lên bảng
+const tableBody = document.getElementById('docgia-table');
+
+docGiaList.forEach(docGia => {
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+        <td>${docGia.maDocGia}</td>
+        <td>${docGia.hoTen}</td>
+        <td>${docGia.gioiTinh}</td>
+        <td>${docGia.trangThai}</td>
+        <td>${docGia.sachMuon.join(", ")}</td>
+    `;
+
+    tableBody.appendChild(row);
+});
+</script>
+
 </body>
 </html>
